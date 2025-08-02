@@ -1,0 +1,18 @@
+[project]
+name = "claimcall-ai-voicebot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastapi>=0.116.1",
+    "pipecat-ai[elevenlabs,nim,openai,riva,silerio,silero,webrtc]>=0.0.77",
+    "pipecat-ai-flows>=0.0.18",
+    "python-dateutil>=2.9.0.post0",
+    "uvicorn>=0.35.0",
+    "pipecat-ai-small-webrtc-prebuilt>=1.0.0",
+    "grpcio==1.67.1",
+    "nvidia-riva-client>=2.21.1",
+    "num2words>=0.5.14",
+]
