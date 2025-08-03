@@ -21,8 +21,10 @@ from pipecat.transports.network.small_webrtc import SmallWebRTCTransport
 from pipecat.transports.network.webrtc_connection import IceServer, SmallWebRTCConnection
 # from pipecat.services.nim.llm import NimLLMService
 from pipecat.services.openai.llm import OpenAILLMService
-from pipecat.services.riva.stt import RivaSTTService
-from pipecat.services.riva.tts import RivaTTSService
+# from pipecat.services.riva.stt import RivaSTTService
+from pipecat.services.cartesia.stt import CartesiaSTTService
+# from pipecat.services.riva.tts import RivaTTSService
+from pipecat.services.cartesia.tts import CartesiaTTSService
 from pipecat.transcriptions.language import Language
 from pipecat.adapters.schemas.function_schema import FunctionSchema
 from pipecat.adapters.schemas.tools_schema import ToolsSchema
@@ -39,6 +41,8 @@ from pipecat.services.elevenlabs.tts import ElevenLabsTTSService
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from num2words import num2words
+from pipecat.frames.frames import EndFrame
+from pipecat.frames.frames import TTSSpeakFrame
 
 
 load_dotenv(override=True)
@@ -195,7 +199,7 @@ async def setup_payment_plan_handler(args: FlowArgs, flow_manager: FlowManager) 
             'end_date': None
         }
         flow_manager.state["plan_type"] = result
-        time.sleep(10)
+        # time.sleep(10)
         next_node = end_node()
 
     return result, next_node
@@ -206,8 +210,13 @@ async def setup_payment_plan_handler(args: FlowArgs, flow_manager: FlowManager) 
 #     next_node = end_node()
 #     return result, next_node
 
+async def graceful_end_handler(args: FlowArgs, flow_manager: FlowManager):
+    """Handler that ensures TTS completes before ending"""
+    await flow_manager.task.queue_frame(TTSSpeakFrame("Have a nice day!"))
+    await flow_manager.task.queue_frame(EndFrame())
+
 async def end_conv(args: FlowArgs) -> tuple[FlowResult, NodeConfig]:
-    time.sleep(20)
+    # time.sleep(20)
     logger.debug("end_conv handler executing")
     result = {"status": "completed"}
     next_node = end_node()
@@ -484,14 +493,23 @@ def twelve_month_setup_node() -> NodeConfig:
 def end_node() -> NodeConfig:
     return {
         "name": "completed",
+        # "pre_actions": [
+        #     {
+        #         "type": "tts_say",
+        #         "text": (
+        #             "Thank you for your time. Feel free to reach out at any time. Goodbye."
+        #         ),
+        #     }
+        # ],
+        # "respond_immediately": False,
         "task_messages": [{
-                "role": "assistant",
+                "role": "system",
                 "content": (
-                    "Thank you for your time. Feel free to reach out at any time. Goodbye."
+                    "Say goodbye to the user with 'Have a nice day!'"
                 )
             }
         ],
-        "post_actions": [{"type": "end_conversation"}]
+        "post_actions": [{"type": "function", "handler": graceful_end_handler}],
     }
 
 async def run_example(webrtc_connection: SmallWebRTCConnection):
@@ -507,15 +525,19 @@ async def run_example(webrtc_connection: SmallWebRTCConnection):
         ),
     )
 
-    stt = RivaSTTService(
-        api_key=os.getenv("NVIDIA_API_KEY"),
-        # model_function_map={
-        # "function_id": "d3fe9151-442b-4204-a70d-5fcc597fd610",
-        # "model_name": "parakeet-tdt-0.6b-v2"
-        # },
-        params=RivaSTTService.InputParams(
-        language=Language.EN_US
-        )
+    # stt = RivaSTTService(
+    #     api_key=os.getenv("NVIDIA_API_KEY"),
+    #     # model_function_map={
+    #     # "function_id": "d3fe9151-442b-4204-a70d-5fcc597fd610",
+    #     # "model_name": "parakeet-tdt-0.6b-v2"
+    #     # },
+    #     params=RivaSTTService.InputParams(
+    #     language=Language.EN_US
+    #     )
+    # )
+    
+    stt = CartesiaSTTService(
+        api_key=os.getenv("CARTESIA_API_KEY")
     )
 
     llm = OpenAILLMService(
@@ -539,12 +561,22 @@ async def run_example(webrtc_connection: SmallWebRTCConnection):
     #     )
     # )
     
-    tts = RivaTTSService(
-        api_key=os.getenv("NVIDIA_API_KEY"),
-        voice_id="Magpie-Multilingual.EN-US.Ray",
-        params=RivaTTSService.InputParams(
-            language=Language.EN_US,
-            quality=20
+    # tts = RivaTTSService(
+    #     api_key=os.getenv("NVIDIA_API_KEY"),
+    #     voice_id="Magpie-Multilingual.EN-US.Ray",
+    #     params=RivaTTSService.InputParams(
+    #         language=Language.EN_US,
+    #         quality=20
+    #     )
+    # )
+    
+    tts = CartesiaTTSService(
+        api_key=os.getenv("CARTESIA_API_KEY"),
+        voice_id="bf0a246a-8642-498a-9950-80c35e9276b5",
+        model="sonic-2",
+        params=CartesiaTTSService.InputParams(
+            language=Language.EN,
+            speed="normal"
         )
     )
 

@@ -220,6 +220,27 @@ wheels = [
 ]
 
 [[package]]
+name = "cartesia"
+version = "2.0.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "audioop-lts", marker = "python_full_version >= '3.13' and python_full_version < '4'" },
+    { name = "httpx" },
+    { name = "httpx-sse" },
+    { name = "iterators" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
+    { name = "pydub" },
+    { name = "typing-extensions" },
+    { name = "websockets" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/80/03/1d33b10d032e4d7a824c5eb521a94ddee87d203a4815af78d52e73465966/cartesia-2.0.6.tar.gz", hash = "sha256:07c1a23f588951a16a60aaad2019b09bd2cef36453d391fd2c5d613416333c75", size = 73756, upload-time = "2025-07-31T18:15:30.978Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a0/85/fb958075e965d42a0b4b25133e229f528f32aaab25e24af067eb9289d754/cartesia-2.0.6-py3-none-any.whl", hash = "sha256:63abf753d446386372ba30105465c70af1e491c9d16e4d2a7be5948302ffdfcd", size = 145849, upload-time = "2025-07-31T18:15:29.575Z" },
+]
+
+[[package]]
 name = "certifi"
 version = "2025.7.14"
 source = { registry = "https://pypi.org/simple" }
@@ -271,7 +292,7 @@ dependencies = [
     { name = "grpcio" },
     { name = "num2words" },
     { name = "nvidia-riva-client" },
-    { name = "pipecat-ai", extra = ["elevenlabs", "openai", "riva", "silero", "webrtc"] },
+    { name = "pipecat-ai", extra = ["cartesia", "elevenlabs", "openai", "riva", "silero", "webrtc"] },
     { name = "pipecat-ai-flows" },
     { name = "pipecat-ai-small-webrtc-prebuilt" },
     { name = "python-dateutil" },
@@ -285,7 +306,7 @@ requires-dist = [
     { name = "grpcio", specifier = "==1.67.1" },
     { name = "num2words", specifier = ">=0.5.14" },
     { name = "nvidia-riva-client", specifier = ">=2.21.1" },
-    { name = "pipecat-ai", extras = ["elevenlabs", "nim", "openai", "riva", "silerio", "silero", "webrtc"], specifier = ">=0.0.77" },
+    { name = "pipecat-ai", extras = ["cartesia", "elevenlabs", "nim", "openai", "riva", "silerio", "silero", "webrtc"], specifier = ">=0.0.77" },
     { name = "pipecat-ai-flows", specifier = ">=0.0.18" },
     { name = "pipecat-ai-small-webrtc-prebuilt", specifier = ">=1.0.0" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
@@ -700,6 +721,15 @@ wheels = [
 ]
 
 [[package]]
+name = "httpx-sse"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/60/8f4281fa9bbf3c8034fd54c0e7412e66edbab6bc74c4996bd616f8d0406e/httpx-sse-0.4.0.tar.gz", hash = "sha256:1e81a3a3070ce322add1d3529ed42eb5f70817f45ed6ec915ab753f961139721", size = 12624, upload-time = "2023-12-22T08:01:21.083Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e1/9b/a181f281f65d776426002f330c31849b86b31fc9d848db62e16f03ff739f/httpx_sse-0.4.0-py3-none-any.whl", hash = "sha256:f329af6eae57eaa2bdfd962b42524764af68075ea87370a2de920af5341e318f", size = 7819, upload-time = "2023-12-22T08:01:19.89Z" },
+]
+
+[[package]]
 name = "humanfriendly"
 version = "10.0"
 source = { registry = "https://pypi.org/simple" }
@@ -727,6 +757,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e8/ac/fb4c578f4a3256561548cd825646680edcadb9440f3f68add95ade1eb791/ifaddr-0.2.0.tar.gz", hash = "sha256:cc0cbfcaabf765d44595825fb96a99bb12c79716b73b44330ea38ee2b0c4aed4", size = 10485, upload-time = "2022-06-15T21:40:27.561Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9c/1f/19ebc343cc71a7ffa78f17018535adc5cbdd87afb31d7c34874680148b32/ifaddr-0.2.0-py3-none-any.whl", hash = "sha256:085e0305cfe6f16ab12d72e2024030f5d52674afad6911bb1eee207177b8a748", size = 12314, upload-time = "2022-06-15T21:40:25.756Z" },
+]
+
+[[package]]
+name = "iterators"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/02/c4/135b5bdb9f14f728fe1274361b336f77c5f1606af9a5622a765fe75f5fa0/iterators-0.2.0.tar.gz", hash = "sha256:e9927a1ea1ef081830fd1512f3916857c36bd4b37272819a6cd29d0f44431b97", size = 4284, upload-time = "2023-01-23T16:07:02.46Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bd/a1/9c29772ac9f3bdf9837c92ba5c1fc93f75da14c2e0c3fc41e10485f68feb/iterators-0.2.0-py3-none-any.whl", hash = "sha256:1d7ff03f576c9de0e01bac66209556c066d6b1fc45583a99cfc9f4645be7900e", size = 5022, upload-time = "2023-01-23T16:07:00.352Z" },
 ]
 
 [[package]]
@@ -1292,6 +1331,10 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+cartesia = [
+    { name = "cartesia" },
+    { name = "websockets" },
+]
 elevenlabs = [
     { name = "websockets" },
 ]
@@ -1499,6 +1542,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/68/85/1ea668bbab3c50071ca613c6ab30047fb36ab0da1b92fa8f17bbc38fd36c/pydantic_settings-2.10.1.tar.gz", hash = "sha256:06f0062169818d0f5524420a360d632d5857b83cffd4d42fe29597807a1614ee", size = 172583, upload-time = "2025-06-24T13:26:46.841Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/58/f0/427018098906416f580e3cf1366d3b1abfb408a0652e9f31600c24a1903c/pydantic_settings-2.10.1-py3-none-any.whl", hash = "sha256:a60952460b99cf661dc25c29c0ef171721f98bfcb52ef8d9ea4c943d7c8cc796", size = 45235, upload-time = "2025-06-24T13:26:45.485Z" },
+]
+
+[[package]]
+name = "pydub"
+version = "0.25.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/9a/e6bca0eed82db26562c73b5076539a4a08d3cffd19c3cc5913a3e61145fd/pydub-0.25.1.tar.gz", hash = "sha256:980a33ce9949cab2a569606b65674d748ecbca4f0796887fd6f46173a7b0d30f", size = 38326, upload-time = "2021-03-10T02:09:54.659Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a6/53/d78dc063216e62fc55f6b2eebb447f6a4b0a59f55c8406376f76bf959b08/pydub-0.25.1-py2.py3-none-any.whl", hash = "sha256:65617e33033874b59d87db603aa1ed450633288aefead953b30bded59cb599a6", size = 32327, upload-time = "2021-03-10T02:09:53.503Z" },
 ]
 
 [[package]]
