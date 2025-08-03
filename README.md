@@ -2,5 +2,5 @@
 
 ## 📹 Demo
 
-You can watch the full demo [here](./demo/Recording 2025-08-03 203334.mp4).
+You can watch the full demo [demo on Google Drive](https://drive.google.com/file/d/10mptEP5FyJSIosPZOXPIyJIV6jq0KMrU/view?usp=sharing).
 
