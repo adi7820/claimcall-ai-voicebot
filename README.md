@@ -2,4 +2,4 @@
 
 ## 📹 Demo
 
-[![Watch the demo](./assets/demo_thumbnail.png)](https://drive.google.com/file/d/1hAbCxyzAbcdEfG12345/view)
+[![Watch the demo](./asset/thumb-pipe.png)](https://drive.google.com/file/d/10mptEP5FyJSIosPZOXPIyJIV6jq0KMrU/view?usp=sharing)
